@@ -2,8 +2,8 @@ package com.codezfox.exchangerates.di;
 
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.codezfox.exchangerates.data.source.RatesRepository;
-import com.codezfox.exchangerates.data.source.RatesRepositoryImpl;
+import com.codezfox.exchangerates.data.repositories.currencies.CurrenciesRepository;
+import com.codezfox.exchangerates.data.repositories.currencies.CurrenciesRepositoryImpl;
 
 import javax.inject.Singleton;
 
@@ -21,8 +21,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    RatesRepository provideRatesRepository() {
-        return new RatesRepositoryImpl();
+    CurrenciesRepository provideCurrenciesRepository() {
+        return new CurrenciesRepositoryImpl();
     }
 
 }

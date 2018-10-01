@@ -1,6 +1,6 @@
 package com.codezfox.exchangerates.di;
 
-import com.codezfox.exchangerates.rates.RatesFragment;
+import com.codezfox.exchangerates.ui.currencies.CurrenciesFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -9,6 +9,6 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
-    abstract RatesFragment contributeRatesFragment();
+    abstract CurrenciesFragment contributeRatesFragment();
 
 }

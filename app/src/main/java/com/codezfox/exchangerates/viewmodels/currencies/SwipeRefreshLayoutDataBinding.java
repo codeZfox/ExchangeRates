@@ -1,9 +1,7 @@
-package com.codezfox.exchangerates;
+package com.codezfox.exchangerates.viewmodels.currencies;
 
 import android.databinding.BindingAdapter;
 import android.support.v4.widget.SwipeRefreshLayout;
-
-import com.codezfox.exchangerates.rates.RatesViewModel;
 
 public class SwipeRefreshLayoutDataBinding {
 
@@ -13,7 +11,7 @@ public class SwipeRefreshLayoutDataBinding {
      * Creates the {@code android:onRefresh} for a {@link SwipeRefreshLayout}.
      */
     @BindingAdapter("android:onRefresh")
-    public static void setSwipeRefreshLayoutOnRefreshListener(ScrollChildSwipeRefreshLayout view, final RatesViewModel viewModel) {
+    public static void setSwipeRefreshLayoutOnRefreshListener(SwipeRefreshLayout view, final CurrenciesViewModel viewModel) {
         view.setOnRefreshListener(viewModel::load);
     }
 

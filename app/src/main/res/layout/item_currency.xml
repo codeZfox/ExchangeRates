@@ -7,9 +7,10 @@
     <data>
 
         <variable
-            name="rate"
-            type="com.codezfox.exchangerates.data.Rate"
+            name="currency"
+            type="com.codezfox.exchangerates.data.models.Currency"
             />
+
     </data>
 
     <android.support.v7.widget.CardView
@@ -34,8 +35,18 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="name"
+                android:text="@{currency.name}"
+                android:textColor="?attr/colorPrimaryDark"
+                android:textSize="16sp"
                 android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{currency.descriptionUI()}"
+                android:textSize="14sp"
                 />
 
         </LinearLayout>

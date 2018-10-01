@@ -1,7 +1,7 @@
 package com.codezfox.exchangerates.di;
 
 
-import com.codezfox.exchangerates.rates.RatesViewModel;
+import com.codezfox.exchangerates.viewmodels.currencies.CurrenciesViewModel;
 
 import dagger.Subcomponent;
 
@@ -17,6 +17,6 @@ public interface ViewModelSubComponent {
         ViewModelSubComponent build();
     }
 
-    RatesViewModel ratesViewModel();
+    CurrenciesViewModel ratesViewModel();
 
 }

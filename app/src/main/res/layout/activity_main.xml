@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".ui.MainActivity"
     >
 
     <fragment
         android:id="@+id/container"
-        android:name="com.codezfox.exchangerates.rates.RatesFragment"
+        android:name="com.codezfox.exchangerates.ui.currencies.CurrenciesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

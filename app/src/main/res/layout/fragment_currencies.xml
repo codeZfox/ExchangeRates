@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewmodel"
+            type="com.codezfox.exchangerates.viewmodels.currencies.CurrenciesViewModel"
+            />
+
+    </data>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onRefresh="@{viewmodel}"
+        app:refreshing="@{viewmodel.dataLoading}"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}"
+                tools:visibility="gone"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="32dp"
+                android:gravity="center"
+                android:text="@{viewmodel.errorCause.getMessageFull(context)}"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}"
+                tools:text="viewmodel.emptyString"
+                />
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</layout>
+

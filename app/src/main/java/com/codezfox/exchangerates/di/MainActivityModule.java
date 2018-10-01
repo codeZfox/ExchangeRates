@@ -1,6 +1,6 @@
 package com.codezfox.exchangerates.di;
 
-import com.codezfox.exchangerates.MainActivity;
+import com.codezfox.exchangerates.ui.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

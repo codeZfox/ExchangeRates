@@ -1,12 +1,9 @@
-package com.codezfox.exchangerates
+package com.codezfox.exchangerates.ui
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
+import com.codezfox.exchangerates.R
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
@@ -26,9 +23,3 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 }
 
-
-inline fun <reified T : ViewModel> FragmentActivity.obtainViewModel(factory: ViewModelProvider.Factory) =
-        ViewModelProviders.of(this, factory).get(T::class.java)
-
-inline fun <reified T : ViewModel> Fragment.obtainViewModel(factory: ViewModelProvider.Factory) =
-        ViewModelProviders.of(this, factory).get(T::class.java)
