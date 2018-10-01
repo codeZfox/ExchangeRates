@@ -2,7 +2,13 @@ package com.codezfox.exchangerates.ui.currencies
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.databinding.DataBindingUtil
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -15,9 +21,9 @@ import com.codezfox.exchangerates.R
 import com.codezfox.exchangerates.data.models.Currency
 import com.codezfox.exchangerates.databinding.FragmentCurrenciesBinding
 import com.codezfox.exchangerates.di.Injectable
-import com.codezfox.exchangerates.viewmodels.currencies.CurrenciesViewModel
 import com.codezfox.exchangerates.utils.ErrorCause
 import com.codezfox.exchangerates.utils.obtainViewModel
+import com.codezfox.exchangerates.viewmodels.currencies.CurrenciesViewModel
 import org.jetbrains.anko.alert
 import javax.inject.Inject
 
@@ -31,6 +37,8 @@ class CurrenciesFragment : Fragment(), Injectable {
     private lateinit var binding: FragmentCurrenciesBinding
 
     private val adapter = CurrencyAdapter()
+
+    private val networkChangeReceiver = NetworkChangeReceiver()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -79,7 +87,51 @@ class CurrenciesFragment : Fragment(), Injectable {
             }
         })
 
+        activity!!.registerReceiver(networkChangeReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+
         return binding.getRoot()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity!!.unregisterReceiver(networkChangeReceiver)
+    }
+
+    inner class NetworkChangeReceiver : BroadcastReceiver() {
+        private var isConnected = false
+        private var isFirstOnReceive = false
+
+        override fun onReceive(context: Context, intent: Intent) {
+            if (!isFirstOnReceive) {
+                isFirstOnReceive = true
+                return
+            }
+            isNetworkAvailable(context)
+        }
+
+        private fun isNetworkAvailable(context: Context): Boolean {
+
+            val connectivity = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+
+            if (connectivity != null) {
+                val info = connectivity.allNetworkInfo
+                if (info != null) {
+                    for (i in info.indices) {
+                        if (info[i].state == NetworkInfo.State.CONNECTED) {
+                            if (!isConnected) {
+                                isConnected = true
+                                ratesViewModel.load()
+                            }
+                            return true
+                        }
+                    }
+                }
+            }
+
+            isConnected = false
+            return false
+        }
+
     }
 
 }

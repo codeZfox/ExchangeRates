@@ -7,4 +7,8 @@ interface CurrenciesDataSource {
 
     fun getData(): List<Currency>
 
+    fun saveData(list: List<Currency>) {
+
+    }
+
 }

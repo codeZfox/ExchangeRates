@@ -1,4 +1,4 @@
-package com.codezfox.exchangerates.data.repositories
+package com.codezfox.exchangerates.data.repositories.currencies.source.remote
 
 import com.codezfox.exchangerates.data.models.CurrencyResponse
 import okhttp3.OkHttpClient

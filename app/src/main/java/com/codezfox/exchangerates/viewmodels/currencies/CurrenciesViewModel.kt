@@ -8,12 +8,14 @@ import android.databinding.ObservableField
 import com.codezfox.exchangerates.data.models.Currency
 import com.codezfox.exchangerates.data.repositories.currencies.CurrenciesRepository
 import com.codezfox.exchangerates.utils.*
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
 class CurrenciesViewModel @Inject constructor(
 
-        private var ratesRepository: CurrenciesRepository,
+        private val ratesRepository: CurrenciesRepository,
 
         application: Application
 
@@ -25,12 +27,15 @@ class CurrenciesViewModel @Inject constructor(
 
     val empty = ObservableBoolean(true)
     val errorCause = ObservableField<ErrorCause>()
+    val lastDateData = ObservableField<String>()
 
     val alert = SingleLiveEvent<ErrorCause>()
 
     init {
         load()
     }
+
+    var simpleDateFormat = SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.getDefault())
 
     fun load() {
 
@@ -49,7 +54,10 @@ class CurrenciesViewModel @Inject constructor(
                 empty.set(items.value.isNullOrEmpty())
 
                 errorCause.set(error?.parseException())
-                alert.setValue(errorCause.get())
+                if (!items.value.isNullOrEmpty()) {
+                    lastDateData.set("Последнее обновление: " + simpleDateFormat.format(ratesRepository.getLastDateData()))
+                    alert.setValue(errorCause.get())
+                }
 
             }, {
 

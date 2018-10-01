@@ -66,20 +66,25 @@ class ErrorCause(exception: Throwable, message: String? = null) : Exception(mess
 
 }
 
-fun Throwable.parseException() = when (this) {
-    is ErrorCause -> this
-    is SocketTimeoutException -> ErrorCause(this).also {
-        it.messageResId = R.string.error_socket_timeout_exception
-        it.isConnectException = true
+fun Throwable.parseException(): ErrorCause {
+
+    this.printStackTrace()
+
+    return when (this) {
+        is ErrorCause -> this
+        is SocketTimeoutException -> ErrorCause(this).also {
+            it.messageResId = R.string.error_socket_timeout_exception
+            it.isConnectException = true
+        }
+        is UnknownHostException -> ErrorCause(this).also {
+            it.messageResId = R.string.error_network_exception
+            it.isConnectException = true
+        }
+        is ConnectException -> ErrorCause(this).also {
+            it.messageResId = R.string.error_network_exception
+            it.isConnectException = true
+        }
+        else -> ErrorCause(this)
     }
-    is UnknownHostException -> ErrorCause(this).also {
-        it.messageResId = R.string.error_network_exception
-        it.isConnectException = true
-    }
-    is ConnectException -> ErrorCause(this).also {
-        it.messageResId = R.string.error_network_exception
-        it.isConnectException = true
-    }
-    else -> ErrorCause(this)
 }
 

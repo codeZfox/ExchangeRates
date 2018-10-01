@@ -1,17 +1,20 @@
 package com.codezfox.exchangerates.data.models
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
-
+@Entity
 @Root(name = "Currency", strict = false)
 class Currency(
 
 
 ) {
+    @PrimaryKey
     @field:Attribute(name = "Id")
-    var id: String? = null
+    var id: String = ""
 
     @field:Element(name = "NumCode")
     var numCode: String? = null

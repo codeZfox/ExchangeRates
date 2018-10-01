@@ -1,7 +1,7 @@
-package com.codezfox.exchangerates.data.repositories.currencies.source
+package com.codezfox.exchangerates.data.repositories.currencies.source.remote
 
 import com.codezfox.exchangerates.data.models.Currency
-import com.codezfox.exchangerates.data.repositories.Api
+import com.codezfox.exchangerates.data.repositories.currencies.source.CurrenciesDataSource
 import com.codezfox.exchangerates.utils.bodyOrError
 
 internal class CurrenciesRemoteDataSourceImpl : CurrenciesDataSource {

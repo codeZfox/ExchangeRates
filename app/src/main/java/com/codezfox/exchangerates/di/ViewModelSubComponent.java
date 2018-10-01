@@ -17,6 +17,6 @@ public interface ViewModelSubComponent {
         ViewModelSubComponent build();
     }
 
-    CurrenciesViewModel ratesViewModel();
+    CurrenciesViewModel currenciesViewModel();
 
 }

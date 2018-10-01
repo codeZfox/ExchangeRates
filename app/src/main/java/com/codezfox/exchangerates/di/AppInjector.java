@@ -18,11 +18,16 @@ import dagger.android.support.HasSupportFragmentInjector;
  */
 public class AppInjector {
 
+    public static AppComponent appComponent;
+
     private AppInjector() {
     }
 
     public static void init(App application) {
-        DaggerAppComponent.builder().application(application).build().inject(application);
+
+        appComponent = DaggerAppComponent.builder().application(application).build();
+
+        appComponent.inject(application);
 
         application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
