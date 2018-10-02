@@ -8,10 +8,7 @@ import org.simpleframework.xml.Root
 
 @Entity
 @Root(name = "Currency", strict = false)
-class Currency(
-
-
-) {
+class Currency {
     @PrimaryKey
     @field:Attribute(name = "Id")
     var id: String = ""

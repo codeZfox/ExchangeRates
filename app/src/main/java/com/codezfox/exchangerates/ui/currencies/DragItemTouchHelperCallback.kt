@@ -27,9 +27,6 @@ class DragItemTouchHelperCallback(private val mAdapter: CurrencyAdapter) : ItemT
         onSelectedChanged?.invoke(actionState == 2)
     }
 
-    override fun onMoved(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, fromPos: Int, target: RecyclerView.ViewHolder, toPos: Int, x: Int, y: Int) {
-        super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y)
-    }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
         mAdapter.onItemMove(viewHolder.adapterPosition, target.adapterPosition)

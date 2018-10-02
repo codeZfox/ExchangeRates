@@ -45,13 +45,13 @@ class CurrenciesFragment : Fragment(), Injectable {
         ratesViewModel = obtainViewModel(viewModelFactory)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_currencies, container, false)
-        binding.setViewmodel(ratesViewModel)
+        binding.viewmodel = ratesViewModel
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
         val callback = DragItemTouchHelperCallback(adapter).also {
             it.onSelectedChanged = { isSelected ->
-                binding.swipeRefreshLayout.setEnabled(!isSelected)
+                binding.swipeRefreshLayout.isEnabled = !isSelected
             }
         }
         val touchHelper = ItemTouchHelper(callback)
@@ -63,9 +63,7 @@ class CurrenciesFragment : Fragment(), Injectable {
         )
 
         ratesViewModel.items.observe(this, Observer<List<Currency>> { items ->
-            if (items != null) {
-                adapter.setCurrencyItems(items)
-            }
+            items?.let { adapter.setCurrencyItems(items) }
         })
 
         ratesViewModel.alert.observe(this, Observer<ErrorCause> { errorCause ->
@@ -89,7 +87,7 @@ class CurrenciesFragment : Fragment(), Injectable {
 
         activity!!.registerReceiver(networkChangeReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
-        return binding.getRoot()
+        return binding.root
     }
 
     override fun onDestroy() {

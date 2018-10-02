@@ -20,7 +20,7 @@ interface Api {
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .client(buildOkHttpClient())
                 .build()
-                .create(Api::class.java)
+                .create(Api::class.java)!!
 
         private fun buildOkHttpClient(): OkHttpClient {
             return OkHttpClient.Builder().also {

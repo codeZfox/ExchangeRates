@@ -56,7 +56,7 @@ class CurrenciesViewModel @Inject constructor(
                 errorCause.set(error?.parseException())
                 if (!items.value.isNullOrEmpty()) {
                     lastDateData.set("Последнее обновление: " + simpleDateFormat.format(ratesRepository.getLastDateData()))
-                    alert.setValue(errorCause.get())
+                    alert.value = errorCause.get()
                 }
 
             }, {
@@ -65,7 +65,7 @@ class CurrenciesViewModel @Inject constructor(
 
                 errorCause.set(it.parseException())
                 if (!items.value.isNullOrEmpty()) {
-                    alert.setValue(errorCause.get())
+                    alert.value = errorCause.get()
                 }
 
             })
